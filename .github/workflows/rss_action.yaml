@@ -2,8 +2,19 @@ name: Auto RSS Fetch
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # 每6小时运行一次
-  workflow_dispatch:      # 允许手动触发
+    - cron: '17 */8 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'keywords.dat'
+      - 'journals.dat'
+      - 'get_RSS.py'
+      - 'journal_map.py'
+      - 'build_site.py'
+      - 'paper_feed_config.json'
+      - 'requirements.txt'
+      - '.github/workflows/rss_action.yaml'
 
 concurrency:
   group: paper-feed-${{ github.ref }}
@@ -12,54 +23,58 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
-    # 这一步非常重要：赋予脚本写入仓库的权限
+    timeout-minutes: 25
     permissions:
       contents: write
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v6
-      with:
-        fetch-depth: 0
-
-    - name: Set up Python
-      uses: actions/setup-python@v6
-      with:
-        python-version: '3.9'
-
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-
-    - name: Run RSS Script
-      env: 
-        RSS_JOURNALS: ${{ secrets.RSS_JOURNALS }}
-        RSS_KEYWORDS: ${{ secrets.RSS_KEYWORDS }}
-      run: python get_RSS.py
-
-    - name: Run AI Summary Script
-      env:
-        AI_SUMMARY_ENABLED: ${{ secrets.AI_SUMMARY_ENABLED }}
-        AI_API_CONFIG: ${{ secrets.AI_API_CONFIG }}
-        AI_SUMMARY_PROMPT: ${{ secrets.AI_SUMMARY_PROMPT }}
-        AI_SUMMARY_INTERVAL_HOURS: ${{ secrets.AI_SUMMARY_INTERVAL_HOURS }}
-        AI_SUMMARY_MAX_CANDIDATES: ${{ secrets.AI_SUMMARY_MAX_CANDIDATES }}
-        PAPER_FEED_PUBLIC_BASE_URL: ${{ vars.PAPER_FEED_PUBLIC_BASE_URL }}
-      run: python ai_summary.py
-
-    - name: Commit and Push changes
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        if [ -f filtered_feed.xml ]; then git add filtered_feed.xml; fi
-        if [ -f ai_summary_feed.xml ]; then git add ai_summary_feed.xml; fi
-        if [ -f ai_summary.html ]; then git add ai_summary.html; fi
-        if [ -f ai_summary_state.json ]; then git add ai_summary_state.json; fi
-        if git diff --cached --quiet; then
-          echo "No changes to commit"
-        else
-          git commit -m "Auto-update RSS feed"
-          git pull --rebase origin ${{ github.ref_name }}
-          git push origin HEAD:${{ github.ref_name }}
-        fi
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Fetch and filter papers
+        env:
+          RSS_JOURNALS: ${{ secrets.RSS_JOURNALS }}
+          RSS_KEYWORDS: ${{ secrets.RSS_KEYWORDS }}
+        run: python get_RSS.py
+      - name: Optional AI summary
+        env:
+          AI_SUMMARY_ENABLED: ${{ secrets.AI_SUMMARY_ENABLED }}
+          AI_API_CONFIG: ${{ secrets.AI_API_CONFIG }}
+          AI_SUMMARY_PROMPT: ${{ secrets.AI_SUMMARY_PROMPT }}
+          PAPER_FEED_PUBLIC_BASE_URL: https://jueera.github.io/paper-feed
+        run: python ai_summary.py
+      - name: Build public reading page
+        run: python build_site.py
+      - name: Save RSS history
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add filtered_feed.xml fetch_status.json
+          for f in ai_summary_feed.xml ai_summary.html ai_summary_state.json; do
+            if [ -f "$f" ]; then git add "$f"; fi
+          done
+          if ! git diff --cached --quiet; then
+            git commit -m "Update personalized literature feed"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
