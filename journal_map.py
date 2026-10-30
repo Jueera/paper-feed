@@ -24,6 +24,15 @@
 
 JOURNAL_MAP = [
 
+    {"prefix": "Nature Catalysis", "abbr": "Nat. Catal."},
+    {"prefix": "Nature Chemistry", "abbr": "Nat. Chem."},
+    {"prefix": "Nature Reviews Materials", "abbr": "Nat. Rev. Mater."},
+    {"prefix": "ACS Catalysis: Latest Articles (ACS Publications)", "abbr": "ACS Catal."},
+    {"prefix": "Chemistry of Materials: Latest Articles (ACS Publications)", "abbr": "Chem. Mater."},
+    {"prefix": "RSC - Energy Environ. Sci. latest articles", "abbr": "Energy Environ. Sci."},
+    {"prefix": "RSC - J. Mater. Chem. A latest articles", "abbr": "J. Mater. Chem. A"},
+    {"prefix": "RSC - Catal. Sci. Technol. latest articles", "abbr": "Catal. Sci. Technol."},
+
     # ── arXiv ────────────────────────────────────────────────────────────────
     {"prefix": "cond-mat updates on arXiv.org",             "abbr": "arXiv"},
     {"prefix": "AI for Science - latest papers",            "abbr": "arXiv"},

@@ -3,6 +3,9 @@ import re
 import os
 import datetime
 import time
+import json
+import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from rfeed import Item, Feed, Guid, Serializable
 from email.utils import parsedate_to_datetime
 from journal_map import get_abbr, clean_title
@@ -25,7 +28,10 @@ class DcSource(Serializable):
 
 # --- 配置区域 ---
 OUTPUT_FILE = "filtered_feed.xml"
+FETCH_STATUS_FILE = "fetch_status.json"
 MAX_ITEMS = 1000
+FETCH_TIMEOUT_SECONDS = 30
+MAX_FETCH_WORKERS = 8
 # ----------------
 
 def load_config(filename, env_var_name=None):
@@ -64,14 +70,39 @@ def convert_struct_time_to_datetime(struct_time):
         return datetime.datetime.now()
     return datetime.datetime.fromtimestamp(time.mktime(struct_time))
 
-def parse_rss(rss_url, retries=3):
-    # (保持不变)
+def parse_rss(rss_url, retries=2):
+    """Fetch one source with a timeout and return entries plus its fetch status."""
     print(f"Fetching: {rss_url}...")
+    status = {
+        'url': rss_url,
+        'source': '',
+        'ok': False,
+        'count': 0,
+        'error': None,
+        'warning': None,
+        'http_status': None,
+        'attempts': 0,
+    }
     for attempt in range(retries):
+        status['attempts'] = attempt + 1
         try:
-            feed = feedparser.parse(rss_url)
+            request = urllib.request.Request(rss_url, headers={
+                'User-Agent': 'PaperFeed/1.0 (+https://github.com/Jueera/paper-feed)',
+                'Accept': 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*',
+            })
+            with urllib.request.urlopen(request, timeout=FETCH_TIMEOUT_SECONDS) as response:
+                status['http_status'] = response.status
+                if not 200 <= response.status < 300:
+                    raise ValueError(f"HTTP {response.status}")
+                feed = feedparser.parse(response.read())
+            if not feed.entries:
+                raise ValueError('RSS response contained no entries (empty feed or non-RSS response)')
             entries = []
             journal_title = feed.feed.get('title', 'Unknown Journal')
+            status['source'] = journal_title
+            if feed.get('bozo'):
+                status['warning'] = str(feed.get('bozo_exception', 'RSS parsing warning'))
+                print(f"Warning: RSS parser recovered entries from {rss_url}: {status['warning']}")
             
             for entry in feed.entries:
                 pub_struct = entry.get('published_parsed', entry.get('updated_parsed'))
@@ -85,11 +116,16 @@ def parse_rss(rss_url, retries=3):
                     'journal': journal_title,
                     'id': entry.get('id', entry.get('link', ''))
                 })
-            return entries
+            status.update(ok=True, count=len(entries), error=None)
+            return entries, status
         except Exception as e:
-            print(f"Error parsing {rss_url}: {e}")
-            time.sleep(2)
-    return []
+            if hasattr(e, 'code'):
+                status['http_status'] = e.code
+            status['error'] = f"{type(e).__name__}: {e}"
+            print(f"Warning: Fetch attempt {attempt + 1}/{retries} failed for {rss_url}: {status['error']}")
+            if attempt + 1 < retries:
+                time.sleep(2)
+    return [], status
 
 def get_existing_items():
     # (保持不变，但增加容错：如果 XML 坏了，就返回空列表重新抓)
@@ -180,9 +216,9 @@ def generate_rss_xml(items):
         rss_items.append(rss_item)
 
     feed = Feed(
-        title = "My Customized Papers",
-        link = "https://github.com/your_username/your_repo",
-        description = "Aggregated research papers",
+        title = "Jueera 文献追踪 · 电解水与非晶催化材料",
+        link = "https://jueera.github.io/paper-feed/",
+        description = "Water electrolysis, amorphous structures, active sites and electronic structure",
         language = "en-US",
         lastBuildDate = datetime.datetime.now(),
         items = rss_items
@@ -194,12 +230,11 @@ def generate_rss_xml(items):
 
 def main():
     # 请确保这里的调用参数与你目前的 secrets 配置一致
-    rss_urls = load_config('journals.dat', 'RSS_JOURNALS')
+    rss_urls = list(dict.fromkeys(load_config('journals.dat', 'RSS_JOURNALS')))
     queries = load_config('keywords.dat', 'RSS_KEYWORDS')
     
     if not rss_urls or not queries:
-        print("Error: Configuration files are empty or missing.")
-        return
+        raise RuntimeError("Configuration files are empty or missing.")
 
     existing_entries = get_existing_items()
     seen_ids = set(entry['id'] for entry in existing_entries)
@@ -208,8 +243,11 @@ def main():
     new_count = 0
 
     print("Starting RSS fetch from remote...")
-    for url in rss_urls:
-        fetched_entries = parse_rss(url)
+    source_statuses = []
+    with ThreadPoolExecutor(max_workers=min(MAX_FETCH_WORKERS, len(rss_urls))) as executor:
+        results = list(executor.map(parse_rss, rss_urls))
+    for fetched_entries, source_status in results:
+        source_statuses.append(source_status)
         for entry in fetched_entries:
             if entry['id'] in seen_ids:
                 continue
@@ -220,6 +258,24 @@ def main():
                 new_count += 1
                 print(f"Match found: {entry['title'][:50]}...")
 
+    successful_sources = sum(source['ok'] for source in source_statuses)
+    fetch_status = {
+        'updated_at': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        'total_sources': len(source_statuses),
+        'successful_sources': successful_sources,
+        'failed_sources': len(source_statuses) - successful_sources,
+        'fetched_entries': sum(source['count'] for source in source_statuses),
+        'new_matches': new_count,
+        'stored_items': min(len(all_entries), MAX_ITEMS),
+        'sources': source_statuses,
+    }
+    with open(FETCH_STATUS_FILE, 'w', encoding='utf-8') as handle:
+        json.dump(fetch_status, handle, ensure_ascii=False, indent=2)
+        handle.write('\n')
+    if not successful_sources:
+        raise RuntimeError("All RSS sources failed. Existing feed was preserved; deployment must stop.")
+
+    print(f"Fetched {successful_sources}/{len(source_statuses)} sources successfully.")
     print(f"Added {new_count} new entries.")
     generate_rss_xml(all_entries)
 

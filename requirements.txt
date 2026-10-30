@@ -1,2 +1,2 @@
-feedparser
-rfeed
+feedparser==6.0.14
+rfeed==1.1.1
