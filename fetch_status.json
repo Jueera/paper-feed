@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-31T19:59:33.882726+00:00",
+  "updated_at": "2026-11-01T06:06:52.203029+00:00",
   "total_sources": 36,
-  "successful_sources": 23,
-  "failed_sources": 13,
-  "fetched_entries": 3634,
+  "successful_sources": 22,
+  "failed_sources": 14,
+  "fetched_entries": 3626,
   "new_matches": 0,
   "stored_items": 138,
   "sources": [
@@ -19,13 +19,13 @@
     },
     {
       "url": "https://www.nature.com/natcatal.rss",
-      "source": "",
-      "ok": false,
-      "count": 0,
-      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
+      "source": "Nature Catalysis",
+      "ok": true,
+      "count": 8,
+      "error": null,
       "warning": null,
       "http_status": 200,
-      "attempts": 2
+      "attempts": 1
     },
     {
       "url": "https://www.nature.com/nenergy.rss",
@@ -59,13 +59,13 @@
     },
     {
       "url": "https://www.nature.com/ncomms.rss",
-      "source": "Nature Communications",
-      "ok": true,
-      "count": 8,
-      "error": null,
+      "source": "",
+      "ok": false,
+      "count": 0,
+      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
       "warning": null,
       "http_status": 200,
-      "attempts": 1
+      "attempts": 2
     },
     {
       "url": "https://www.nature.com/nchem.rss",
@@ -99,13 +99,13 @@
     },
     {
       "url": "https://www.nature.com/commsmat.rss",
-      "source": "Communications Materials",
-      "ok": true,
-      "count": 8,
-      "error": null,
+      "source": "",
+      "ok": false,
+      "count": 0,
+      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
       "warning": null,
       "http_status": 200,
-      "attempts": 1
+      "attempts": 2
     },
     {
       "url": "https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=accacs",
