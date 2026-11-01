@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-01T15:10:53.163050+00:00",
+  "updated_at": "2026-11-01T20:30:46.446092+00:00",
   "total_sources": 36,
-  "successful_sources": 21,
-  "failed_sources": 15,
-  "fetched_entries": 3618,
-  "new_matches": 4,
+  "successful_sources": 24,
+  "failed_sources": 12,
+  "fetched_entries": 3642,
+  "new_matches": 0,
   "stored_items": 142,
   "sources": [
     {
@@ -39,13 +39,13 @@
     },
     {
       "url": "https://www.nature.com/nmat.rss",
-      "source": "",
-      "ok": false,
-      "count": 0,
-      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
+      "source": "Nature Materials",
+      "ok": true,
+      "count": 8,
+      "error": null,
       "warning": null,
       "http_status": 200,
-      "attempts": 2
+      "attempts": 1
     },
     {
       "url": "https://www.nature.com/nnano.rss",
@@ -79,13 +79,13 @@
     },
     {
       "url": "https://www.nature.com/natrevmats.rss",
-      "source": "",
-      "ok": false,
-      "count": 0,
-      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
+      "source": "Nature Reviews Materials",
+      "ok": true,
+      "count": 8,
+      "error": null,
       "warning": null,
       "http_status": 200,
-      "attempts": 2
+      "attempts": 1
     },
     {
       "url": "https://www.nature.com/npjcompumats.rss",
@@ -99,10 +99,10 @@
     },
     {
       "url": "https://www.nature.com/commsmat.rss",
-      "source": "",
-      "ok": false,
-      "count": 0,
-      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
+      "source": "Communications Materials",
+      "ok": true,
+      "count": 8,
+      "error": null,
       "warning": null,
       "http_status": 200,
       "attempts": 2
