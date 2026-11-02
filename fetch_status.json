@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-11-02T06:05:22.871907+00:00",
+  "updated_at": "2026-11-02T18:23:35.625969+00:00",
   "total_sources": 36,
   "successful_sources": 23,
   "failed_sources": 13,
-  "fetched_entries": 3634,
-  "new_matches": 0,
-  "stored_items": 142,
+  "fetched_entries": 2712,
+  "new_matches": 10,
+  "stored_items": 152,
   "sources": [
     {
       "url": "https://www.nature.com/nature.rss",
@@ -59,13 +59,13 @@
     },
     {
       "url": "https://www.nature.com/ncomms.rss",
-      "source": "Nature Communications",
-      "ok": true,
-      "count": 8,
-      "error": null,
+      "source": "",
+      "ok": false,
+      "count": 0,
+      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
       "warning": null,
       "http_status": 200,
-      "attempts": 1
+      "attempts": 2
     },
     {
       "url": "https://www.nature.com/nchem.rss",
@@ -89,13 +89,13 @@
     },
     {
       "url": "https://www.nature.com/npjcompumats.rss",
-      "source": "",
-      "ok": false,
-      "count": 0,
-      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
+      "source": "npj Computational Materials",
+      "ok": true,
+      "count": 8,
+      "error": null,
       "warning": null,
       "http_status": 200,
-      "attempts": 2
+      "attempts": 1
     },
     {
       "url": "https://www.nature.com/commsmat.rss",
@@ -201,7 +201,7 @@
       "url": "https://advanced.onlinelibrary.wiley.com/feed/16163028/most-recent",
       "source": "Wiley: Advanced Functional Materials: Table of Contents",
       "ok": true,
-      "count": 650,
+      "count": 140,
       "error": null,
       "warning": null,
       "http_status": 200,
@@ -241,7 +241,7 @@
       "url": "https://onlinelibrary.wiley.com/feed/16136829/most-recent",
       "source": "Wiley: Small: Table of Contents",
       "ok": true,
-      "count": 516,
+      "count": 140,
       "error": null,
       "warning": null,
       "http_status": 200,
@@ -321,7 +321,7 @@
       "url": "https://rss.sciencedirect.com/publication/science/22112855",
       "source": "ScienceDirect Publication: Nano Energy",
       "ok": true,
-      "count": 100,
+      "count": 61,
       "error": null,
       "warning": null,
       "http_status": 200,
@@ -361,7 +361,7 @@
       "url": "https://www.cell.com/chem-catalysis/inpress.rss",
       "source": "Chem Catalysis",
       "ok": true,
-      "count": 19,
+      "count": 22,
       "error": null,
       "warning": null,
       "http_status": 200,
