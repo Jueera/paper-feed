@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-02T18:23:35.625969+00:00",
+  "updated_at": "2026-11-03T06:49:35.467312+00:00",
   "total_sources": 36,
-  "successful_sources": 23,
-  "failed_sources": 13,
-  "fetched_entries": 2712,
-  "new_matches": 10,
+  "successful_sources": 24,
+  "failed_sources": 12,
+  "fetched_entries": 2720,
+  "new_matches": 0,
   "stored_items": 152,
   "sources": [
     {
@@ -59,13 +59,13 @@
     },
     {
       "url": "https://www.nature.com/ncomms.rss",
-      "source": "",
-      "ok": false,
-      "count": 0,
-      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
+      "source": "Nature Communications",
+      "ok": true,
+      "count": 8,
+      "error": null,
       "warning": null,
       "http_status": 200,
-      "attempts": 2
+      "attempts": 1
     },
     {
       "url": "https://www.nature.com/nchem.rss",
