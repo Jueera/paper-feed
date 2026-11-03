@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-03T16:16:36.049499+00:00",
+  "updated_at": "2026-11-03T21:50:14.406763+00:00",
   "total_sources": 36,
-  "successful_sources": 22,
-  "failed_sources": 14,
-  "fetched_entries": 2212,
-  "new_matches": 6,
+  "successful_sources": 23,
+  "failed_sources": 13,
+  "fetched_entries": 2220,
+  "new_matches": 0,
   "stored_items": 158,
   "sources": [
     {
@@ -39,6 +39,16 @@
     },
     {
       "url": "https://www.nature.com/nmat.rss",
+      "source": "Nature Materials",
+      "ok": true,
+      "count": 8,
+      "error": null,
+      "warning": null,
+      "http_status": 200,
+      "attempts": 1
+    },
+    {
+      "url": "https://www.nature.com/nnano.rss",
       "source": "",
       "ok": false,
       "count": 0,
@@ -46,16 +56,6 @@
       "warning": null,
       "http_status": 200,
       "attempts": 2
-    },
-    {
-      "url": "https://www.nature.com/nnano.rss",
-      "source": "Nature Nanotechnology",
-      "ok": true,
-      "count": 8,
-      "error": null,
-      "warning": null,
-      "http_status": 200,
-      "attempts": 1
     },
     {
       "url": "https://www.nature.com/ncomms.rss",
@@ -99,13 +99,13 @@
     },
     {
       "url": "https://www.nature.com/commsmat.rss",
-      "source": "",
-      "ok": false,
-      "count": 0,
-      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
+      "source": "Communications Materials",
+      "ok": true,
+      "count": 8,
+      "error": null,
       "warning": null,
       "http_status": 200,
-      "attempts": 2
+      "attempts": 1
     },
     {
       "url": "https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=accacs",
