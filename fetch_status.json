@@ -1,21 +1,21 @@
 {
-  "updated_at": "2026-11-06T15:55:57.420254+00:00",
+  "updated_at": "2026-11-06T21:30:07.026393+00:00",
   "total_sources": 36,
-  "successful_sources": 18,
-  "failed_sources": 18,
-  "fetched_entries": 1598,
-  "new_matches": 8,
+  "successful_sources": 24,
+  "failed_sources": 12,
+  "fetched_entries": 1717,
+  "new_matches": 0,
   "stored_items": 182,
   "sources": [
     {
       "url": "https://www.nature.com/nature.rss",
-      "source": "",
-      "ok": false,
-      "count": 0,
-      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
+      "source": "Nature",
+      "ok": true,
+      "count": 75,
+      "error": null,
       "warning": null,
       "http_status": 200,
-      "attempts": 2
+      "attempts": 1
     },
     {
       "url": "https://www.nature.com/natcatal.rss",
@@ -39,43 +39,43 @@
     },
     {
       "url": "https://www.nature.com/nmat.rss",
-      "source": "",
-      "ok": false,
-      "count": 0,
-      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
+      "source": "Nature Materials",
+      "ok": true,
+      "count": 8,
+      "error": null,
       "warning": null,
       "http_status": 200,
-      "attempts": 2
+      "attempts": 1
     },
     {
       "url": "https://www.nature.com/nnano.rss",
-      "source": "",
-      "ok": false,
-      "count": 0,
-      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
+      "source": "Nature Nanotechnology",
+      "ok": true,
+      "count": 8,
+      "error": null,
       "warning": null,
       "http_status": 200,
-      "attempts": 2
+      "attempts": 1
     },
     {
       "url": "https://www.nature.com/ncomms.rss",
-      "source": "",
-      "ok": false,
-      "count": 0,
-      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
+      "source": "Nature Communications",
+      "ok": true,
+      "count": 8,
+      "error": null,
       "warning": null,
       "http_status": 200,
-      "attempts": 2
+      "attempts": 1
     },
     {
       "url": "https://www.nature.com/nchem.rss",
-      "source": "",
-      "ok": false,
-      "count": 0,
-      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
+      "source": "Nature Chemistry",
+      "ok": true,
+      "count": 8,
+      "error": null,
       "warning": null,
       "http_status": 200,
-      "attempts": 2
+      "attempts": 1
     },
     {
       "url": "https://www.nature.com/natrevmats.rss",
@@ -99,13 +99,13 @@
     },
     {
       "url": "https://www.nature.com/commsmat.rss",
-      "source": "",
-      "ok": false,
-      "count": 0,
-      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
+      "source": "Communications Materials",
+      "ok": true,
+      "count": 8,
+      "error": null,
       "warning": null,
       "http_status": 200,
-      "attempts": 2
+      "attempts": 1
     },
     {
       "url": "https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=accacs",
@@ -321,7 +321,7 @@
       "url": "https://rss.sciencedirect.com/publication/science/22112855",
       "source": "ScienceDirect Publication: Nano Energy",
       "ok": true,
-      "count": 82,
+      "count": 86,
       "error": null,
       "warning": null,
       "http_status": 200,
