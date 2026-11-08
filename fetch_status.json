@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-08T15:12:59.651697+00:00",
+  "updated_at": "2026-11-08T20:29:15.161497+00:00",
   "total_sources": 36,
-  "successful_sources": 23,
-  "failed_sources": 13,
-  "fetched_entries": 1894,
+  "successful_sources": 21,
+  "failed_sources": 15,
+  "fetched_entries": 1883,
   "new_matches": 0,
   "stored_items": 188,
   "sources": [
@@ -79,23 +79,23 @@
     },
     {
       "url": "https://www.nature.com/natrevmats.rss",
-      "source": "Nature Reviews Materials",
-      "ok": true,
-      "count": 8,
-      "error": null,
+      "source": "",
+      "ok": false,
+      "count": 0,
+      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
       "warning": null,
       "http_status": 200,
-      "attempts": 1
+      "attempts": 2
     },
     {
       "url": "https://www.nature.com/npjcompumats.rss",
-      "source": "npj Computational Materials",
-      "ok": true,
-      "count": 8,
-      "error": null,
+      "source": "",
+      "ok": false,
+      "count": 0,
+      "error": "ValueError: RSS response contained no entries (empty feed or non-RSS response)",
       "warning": null,
       "http_status": 200,
-      "attempts": 1
+      "attempts": 2
     },
     {
       "url": "https://www.nature.com/commsmat.rss",
@@ -321,7 +321,7 @@
       "url": "https://rss.sciencedirect.com/publication/science/22112855",
       "source": "ScienceDirect Publication: Nano Energy",
       "ok": true,
-      "count": 92,
+      "count": 94,
       "error": null,
       "warning": null,
       "http_status": 200,
@@ -331,7 +331,7 @@
       "url": "https://rss.sciencedirect.com/publication/science/13596454",
       "source": "ScienceDirect Publication: Acta Materialia",
       "ok": true,
-      "count": 76,
+      "count": 79,
       "error": null,
       "warning": null,
       "http_status": 200,
