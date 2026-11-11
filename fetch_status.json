@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-11-11T16:11:24.167490+00:00",
+  "updated_at": "2026-11-11T22:42:34.159465+00:00",
   "total_sources": 36,
   "successful_sources": 24,
   "failed_sources": 12,
-  "fetched_entries": 2079,
-  "new_matches": 8,
-  "stored_items": 204,
+  "fetched_entries": 2081,
+  "new_matches": 3,
+  "stored_items": 207,
   "sources": [
     {
       "url": "https://www.nature.com/nature.rss",
@@ -321,7 +321,7 @@
       "url": "https://rss.sciencedirect.com/publication/science/22112855",
       "source": "ScienceDirect Publication: Nano Energy",
       "ok": true,
-      "count": 98,
+      "count": 100,
       "error": null,
       "warning": null,
       "http_status": 200,
