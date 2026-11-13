@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-12T16:49:30.653846+00:00",
+  "updated_at": "2026-11-13T06:46:51.827220+00:00",
   "total_sources": 36,
   "successful_sources": 24,
   "failed_sources": 12,
-  "fetched_entries": 2366,
-  "new_matches": 10,
+  "fetched_entries": 2371,
+  "new_matches": 0,
   "stored_items": 217,
   "sources": [
     {
@@ -311,7 +311,7 @@
       "url": "https://rss.sciencedirect.com/publication/science/00219517",
       "source": "ScienceDirect Publication: Journal of Catalysis",
       "ok": true,
-      "count": 63,
+      "count": 67,
       "error": null,
       "warning": null,
       "http_status": 200,
@@ -331,7 +331,7 @@
       "url": "https://rss.sciencedirect.com/publication/science/13596454",
       "source": "ScienceDirect Publication: Acta Materialia",
       "ok": true,
-      "count": 84,
+      "count": 85,
       "error": null,
       "warning": null,
       "http_status": 200,
