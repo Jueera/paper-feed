@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-11-13T06:46:51.827220+00:00",
+  "updated_at": "2026-11-13T16:25:53.001144+00:00",
   "total_sources": 36,
   "successful_sources": 24,
   "failed_sources": 12,
-  "fetched_entries": 2371,
-  "new_matches": 0,
-  "stored_items": 217,
+  "fetched_entries": 2466,
+  "new_matches": 4,
+  "stored_items": 221,
   "sources": [
     {
       "url": "https://www.nature.com/nature.rss",
@@ -231,7 +231,7 @@
       "url": "https://advanced.onlinelibrary.wiley.com/feed/21983844/most-recent",
       "source": "Wiley: Advanced Science: Table of Contents",
       "ok": true,
-      "count": 240,
+      "count": 330,
       "error": null,
       "warning": null,
       "http_status": 200,
@@ -331,7 +331,7 @@
       "url": "https://rss.sciencedirect.com/publication/science/13596454",
       "source": "ScienceDirect Publication: Acta Materialia",
       "ok": true,
-      "count": 85,
+      "count": 90,
       "error": null,
       "warning": null,
       "http_status": 200,
