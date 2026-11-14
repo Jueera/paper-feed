@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-13T16:25:53.001144+00:00",
+  "updated_at": "2026-11-14T06:24:36.916257+00:00",
   "total_sources": 36,
   "successful_sources": 24,
   "failed_sources": 12,
-  "fetched_entries": 2466,
-  "new_matches": 4,
+  "fetched_entries": 2471,
+  "new_matches": 0,
   "stored_items": 221,
   "sources": [
     {
@@ -311,7 +311,7 @@
       "url": "https://rss.sciencedirect.com/publication/science/00219517",
       "source": "ScienceDirect Publication: Journal of Catalysis",
       "ok": true,
-      "count": 67,
+      "count": 72,
       "error": null,
       "warning": null,
       "http_status": 200,
