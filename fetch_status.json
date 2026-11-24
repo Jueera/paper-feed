@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-11-23T20:14:40.055727+00:00",
+  "updated_at": "2026-11-24T09:55:47.404812+00:00",
   "total_sources": 36,
   "successful_sources": 24,
   "failed_sources": 12,
   "fetched_entries": 3099,
-  "new_matches": 0,
-  "stored_items": 278,
+  "new_matches": 4,
+  "stored_items": 282,
   "sources": [
     {
       "url": "https://www.nature.com/nature.rss",
