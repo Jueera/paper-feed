@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-11-24T09:55:47.404812+00:00",
+  "updated_at": "2026-11-25T00:44:53.016636+00:00",
   "total_sources": 36,
   "successful_sources": 24,
   "failed_sources": 12,
-  "fetched_entries": 3099,
-  "new_matches": 4,
-  "stored_items": 282,
+  "fetched_entries": 3100,
+  "new_matches": 1,
+  "stored_items": 283,
   "sources": [
     {
       "url": "https://www.nature.com/nature.rss",
@@ -361,7 +361,7 @@
       "url": "https://www.cell.com/chem-catalysis/inpress.rss",
       "source": "Chem Catalysis",
       "ok": true,
-      "count": 21,
+      "count": 22,
       "error": null,
       "warning": null,
       "http_status": 200,
